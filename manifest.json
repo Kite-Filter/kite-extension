@@ -2,8 +2,7 @@
     "manifest_version": 3,
     "name": "Kite Filter",
     "description": "Private & Secure Web-Filter",
-    "version": "0.0.1",
-    "author": "Entrpix@kite-filter.***",
+    "version": "0.0.2",
 
     "permissions": [
       "bookmarks",
