@@ -1,0 +1,14 @@
+[
+    {
+      "id": 1,
+      "priority": 1,
+      "action": { "type": "block" },
+      "condition": {"urlFilter": "*://*/bare", "resourceTypes": ["main_frame"] }
+    },
+    {
+      "id": 2,
+      "priority": 1,
+      "action": { "type": "block" },
+      "condition": {"urlFilter": "*://*/bare1", "resourceTypes": ["main_frame"] }
+    }
+  ]

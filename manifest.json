@@ -2,12 +2,21 @@
   "manifest_version": 3,
   "name": "Kite Filter",
   "description": "Private & Secure Web-Filter",
-  "version": "0.0.8",
+  "version": "0.0.9",
+
+  "declarative_net_request" : {
+    "rule_resources" : [{
+      "id": "ruleset_1",
+      "enabled": true,
+      "path": "rules_1.json"
+    }]
+  },
 
   "permissions": [
     "activeTab",
     "alarms",
     "bookmarks",
+    "declarativeNetRequest",
     "history",
     "identity",
     "storage",
