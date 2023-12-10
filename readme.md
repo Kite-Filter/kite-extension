@@ -23,8 +23,7 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 - [ ] History Reporting
 - [X] Enfore HTTPS Traffic
 - [X] Block Certain TLDs
-- [ ] Block Newly-Registered Domains
-- [ ] Block IP Connections
+- [] Block Newly-Registered Domains (Cannot Test as of Now)
 - [ ] Block UV & DiP SW's
 - [ ] Block Default TompHTTP Bare Server Paths
 - [ ] Match Site HTML with Popular Unblocker HTMLs
