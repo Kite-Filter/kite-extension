@@ -22,7 +22,7 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
   const url = details.url;
 
   if (url.startsWith('file://')) {
-    const extensions = ['.html', '.mhtml', '.htm', '.html5', '.xhtml', '.shtml', '.phtml'];
+    const extensions = ['.html', '.mhtml', '.htm', '.html5', '.xhtml', '.shtml', '.phtml', '.dhtml'];
 
     if (extensions.some(extension => url.toLowerCase().endsWith(extension))) {
       chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
