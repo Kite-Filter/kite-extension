@@ -1,25 +1,26 @@
 {
-    "manifest_version": 3,
-    "name": "Kite Filter",
-    "description": "Private & Secure Web-Filter",
-    "version": "0.0.2",
+  "manifest_version": 3,
+  "name": "Kite Filter",
+  "description": "Private & Secure Web-Filter",
+  "version": "0.0.2",
 
-    "permissions": [
+  "permissions": [
       "alarms",
       "storage",
       "identity",
       "history",
-      "activeTab"
-    ],
+      "activeTab",
+      "webNavigation"
+  ],
 
-    "background": {
+  "background": {
       "service_worker": "js/filter.js"
-    },
+  },
 
-    "content_scripts": [
+  "content_scripts": [
       {
-        "matches": ["<all_urls>"],
-        "js": ["js/inject.js"]
+          "matches": ["<all_urls>"],
+          "js": ["js/inject.js"]
       }
-    ]
+  ]
 } 

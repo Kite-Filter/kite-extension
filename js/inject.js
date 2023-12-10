@@ -1,5 +1,6 @@
 const blocked = [`example.com`];
 const currentURL = window.location.href;
+const dataURL = /^data:/i;
   
 function isBlocked(url, blockedList) {
     for (const blockedItem of blockedList) {
