@@ -19,8 +19,8 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 - [X] Local HTML File Prevention
 - [X] Block Certain TLDs
 - [X] Block Default TompHTTP Bare Server Paths
-### Needs More Testing
 - [X] Iframe/Embed/Object Prevention
+### Needs More Testing
 - [X] Enfore HTTPS Traffic
 ### Working On
 - [ ] Block Newly-Registered Domains (Cannot Test as of Now)

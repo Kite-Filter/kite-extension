@@ -1,5 +1,5 @@
 const blockedURLs = ['example.com'];
-const blockedTLDs = ['.ga'];
+const blockedTLDs = ['.tech'];
 
 // Site Blocker
 function isBlocked(url, blockedList) {
