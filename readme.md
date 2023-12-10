@@ -13,7 +13,7 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 ## TODO
 - [X] Basic Site Filtering
 - [X] Data: URL Prevention
-- [X] Baic Styled Pages
+- [X] Basic Styled Pages
 - [X] Bookmarklet Prevention
 - [X] Local HTML File Prevention
 - [ ] Iframe/Embed/Object Prevention
