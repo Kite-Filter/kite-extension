@@ -1,0 +1,34 @@
+{
+    "manifest_version": 3,
+    "name": "Kite Filter",
+    "description": "Private & Secure Web-Filter",
+    "version": "0.0.1",
+    "author": "Entrpix@kite-filter.***",
+
+    "permissions": [
+      "downloads",
+      "bookmarks",
+      "pageCapture",
+      "alarms",
+      "storage",
+      "identity",
+      "history",
+      "scripting",
+      "activeTab"
+    ],
+
+    "background": {
+      "service_worker": "js/filter.js"
+    },
+
+    "content_scripts": [
+      {
+        "js": [
+          "js/inject.js"
+        ],
+        "matches": [
+          "<all_urls>"
+        ]
+      }
+    ]
+} 
