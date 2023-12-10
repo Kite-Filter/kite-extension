@@ -1,5 +1,5 @@
 const blockedURLs = ['example.com'];
-const blockedTLDs = ['.org'];
+const blockedTLDs = ['.io'];
 const currentURL = window.location.href;
 
 // Site Block Check

@@ -11,7 +11,21 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Block Data: URLs
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
   const url = details.url;
+
   if (url.startsWith('data:')) {
-    chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/disabled.html') });
+    chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
+  }
+});
+
+// Block Local HTML Files
+chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+  const url = details.url;
+
+  if (url.startsWith('file://')) {
+    const extensions = ['.html', '.mhtml', '.htm', '.html5', '.xhtml', '.shtml', '.phtml'];
+
+    if (extensions.some(extension => url.toLowerCase().endsWith(extension))) {
+      chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
+    }
   }
 });

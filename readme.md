@@ -15,7 +15,7 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 - [X] Data: URL Prevention
 - [X] Baic Styled Pages
 - [ ] Bookmarklet Prevention
-- [ ] Local HTML File Prevention
+- [X] Local HTML File Prevention
 - [ ] Iframe/Embed/Object Prevention
 - [ ] OnBeforeUnload Prevention
 - [ ] Localstorage Integration
