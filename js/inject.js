@@ -24,6 +24,7 @@ function isBlockedTLD(url, blockedTLDList) {
     return false;
 }
 
+// Block Site
 function blockSite() {
     chrome.runtime.sendMessage({ action: 'block' });
 }

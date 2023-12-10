@@ -42,6 +42,7 @@ function removeBookmarklets() {
   });
 }
 
+// Extract Bookmakrs
 function extractBookmarks(bookmarkNodes) {
   const bookmarks = [];
 
@@ -63,6 +64,7 @@ function extractBookmarks(bookmarkNodes) {
   return bookmarks;
 }
 
+// Remove Bookmarks
 function removeBookmarks(bookmarks) {
   bookmarks.forEach((bookmark) => {
     chrome.bookmarks.remove(bookmark.id);
