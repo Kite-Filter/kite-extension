@@ -29,3 +29,54 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     }
   }
 });
+
+// Remove Bookmarklets (javascript: and data:)
+function removeBookmarklets() {
+  chrome.bookmarks.getTree((bookmarkTreeNodes) => {
+    const allBookmarks = extractBookmarks(bookmarkTreeNodes);
+    const javascriptBookmarks = allBookmarks.filter(bookmark => /^javascript:/i.test(bookmark.url));
+    const dataBookmarks = allBookmarks.filter(bookmark => /^data:/i.test(bookmark.url));
+
+    removeBookmarks(javascriptBookmarks);
+    removeBookmarks(dataBookmarks);
+  });
+}
+
+function extractBookmarks(bookmarkNodes) {
+  const bookmarks = [];
+
+  function processNode(node) {
+    if (node.url) {
+      bookmarks.push({ id: node.id, url: node.url });
+    }
+    if (node.children) {
+      for (const child of node.children) {
+        processNode(child);
+      }
+    }
+  }
+
+  for (const node of bookmarkNodes) {
+    processNode(node);
+  }
+
+  return bookmarks;
+}
+
+function removeBookmarks(bookmarks) {
+  bookmarks.forEach((bookmark) => {
+    chrome.bookmarks.remove(bookmark.id);
+  });
+}
+
+// Run on Installation
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === 'install') {
+    removeBookmarklets();
+  }
+});
+
+// Run on Bookmark Creation
+chrome.bookmarks.onCreated.addListener(() => {
+  removeBookmarklets();
+});
