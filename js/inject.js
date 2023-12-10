@@ -12,5 +12,5 @@ function isBlocked(url, blockedList) {
 };
 
 if (isBlocked(currentURL, blocked)) {
-    chrome.runtime.sendMessage({ action: 'block' }); // Filter.js
+    chrome.runtime.sendMessage({ action: 'block' });
 };
