@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Kite Filter",
   "description": "Private & Secure Web-Filter",
-  "version": "0.0.7",
+  "version": "0.0.8",
 
   "permissions": [
     "activeTab",
@@ -11,6 +11,7 @@
     "history",
     "identity",
     "storage",
+    "tabs",
     "webNavigation"
   ],
 

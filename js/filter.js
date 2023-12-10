@@ -80,3 +80,25 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.bookmarks.onCreated.addListener(() => {
   removeBookmarklets();
 });
+
+// Enfore HTTPS
+chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+  const url = details.url;
+
+  if (url.startsWith('http://')) {
+    const httpsUrl = url.replace(/^http:/, 'https:');
+    
+    // Check if Site Supports HTTPS
+    fetch(httpsUrl, { method: 'HEAD' })
+      .then(response => {
+        if (response.ok) {
+          chrome.tabs.update(details.tabId, { url: httpsUrl });
+        } else {
+          chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
+        };
+      })
+      .catch(() => {
+        chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
+      });
+  };
+});
