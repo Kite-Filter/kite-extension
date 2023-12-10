@@ -23,7 +23,7 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 - [ ] History Monitoring
 - [ ] History Reporting
 - [ ] Enfore HTTPS Traffic
-- [ ] Block Certain TLDs
+- [X] Block Certain TLDs
 - [ ] Block Newly-Registered Domains
 - [ ] Block IP Connections
 - [ ] Block UV & DiP SW's
