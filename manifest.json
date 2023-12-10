@@ -6,14 +6,11 @@
     "author": "Entrpix@kite-filter.***",
 
     "permissions": [
-      "downloads",
       "bookmarks",
-      "pageCapture",
       "alarms",
       "storage",
       "identity",
       "history",
-      "scripting",
       "activeTab"
     ],
 
@@ -23,12 +20,8 @@
 
     "content_scripts": [
       {
-        "js": [
-          "js/inject.js"
-        ],
-        "matches": [
-          "<all_urls>"
-        ]
+        "matches": ["<all_urls>"],
+        "js": ["js/inject.js"]
       }
     ]
 } 
