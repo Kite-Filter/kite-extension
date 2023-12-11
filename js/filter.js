@@ -32,7 +32,7 @@ function removeBookmarklets() {
   });
 }
 
-// Extract Bookmakrs
+// Extract Bookmarks
 function extractBookmarks(bookmarkNodes) {
   const bookmarks = [];
 

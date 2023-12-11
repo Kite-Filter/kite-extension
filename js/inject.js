@@ -1,5 +1,17 @@
-const blockedURLs = ['example.com'];
-const blockedTLDs = ['.tech'];
+// Set Localstorage Value
+const lsBlockedURLs = localStorage.getItem('blockedURLs');
+const lsBlockedTLDs = localStorage.getItem('blockedTLDs');
+
+// Blocked URLs/TLDs
+const blockedURLs = lsBlockedURLs ? JSON.parse(lsBlockedURLs) : ['example.com', 'krunker.io'];
+const blockedTLDs = lsBlockedTLDs ? JSON.parse(lsBlockedTLDs) : ['.tech'];
+
+// Update Block List
+function updateBlocked() {
+    localStorage.setItem('blockedURLs', JSON.stringify(blockedURLs));
+    localStorage.setItem('blockedTLDs', JSON.stringify(blockedTLDs));
+}
+
 
 // Site Blocker
 function isBlocked(url, blockedList) {
@@ -59,3 +71,6 @@ const observer = new MutationObserver((mutations) => {
 });
 
 observer.observe(document.body, { childList: true, subtree: true });    
+
+// Reset Block List Every 30s
+setInterval(updateBlocked, 30000);

@@ -27,7 +27,7 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 - [ ] Block UV & DiP SW's
 - [ ] Match Site HTML with Popular Unblocker HTMLs
 ### Hell
-- [ ] Localstorage Integration
+- [X] Localstorage Integration (Extension is Not Fully Finished so it Stays in Here)
 - [ ] Sever Intergration
 - [ ] History Monitoring
 - [ ] History Reporting
