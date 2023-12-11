@@ -26,7 +26,7 @@ function isBlockedTLD(url, blockedTLDList) {
 
 // Block Site
 function blockSite() {
-    chrome.runtime.sendMessage({ action: 'block' });
+     window.location.href = `https://entrpix.github.io`;
 }
 
 // External Site Load Fix

@@ -1,13 +1,3 @@
-// Block Site
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'block') {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const currentTab = tabs[0];
-      chrome.tabs.update(currentTab.id, { url: chrome.runtime.getURL('pages/blocked.html') });
-    });
-  }
-});
-
 // Block Data: URLs
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
   const url = details.url;
@@ -83,24 +73,14 @@ chrome.bookmarks.onCreated.addListener(() => {
   removeBookmarklets();
 });
 
-// Enfore HTTPS
+// Enforce HTTPS
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
   const url = details.url;
 
   if (url.startsWith('http://')) {
     const httpsUrl = url.replace(/^http:/, 'https:');
-    
-    // Check if Site Supports HTTPS
-    fetch(httpsUrl, { method: 'HEAD' })
-      .then(response => {
-        if (response.ok) {
-          chrome.tabs.update(details.tabId, { url: httpsUrl });
-        } else {
-          chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
-        };
-      })
-      .catch(() => {
-        chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
-      });
-  };
+
+    // Redirect HTTP to HTTPS
+    chrome.tabs.update(details.tabId, { url: httpsUrl });
+  }
 });
