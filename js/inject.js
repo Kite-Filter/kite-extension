@@ -10,21 +10,21 @@ function updateBlocked() {
     localStorage.setItem('blockedURLs', JSON.stringify(blockedURLs));
     localStorage.setItem('blockedTLDs', JSON.stringify(blockedTLDs));
     localStorage.setItem('ytAllowlist', JSON.stringify(ytAllowlist));
-};
+}
 
 function blockSite() {
     window.location.href = 'https://entrpix.github.io';
-};
+}
 
 function isBlocked(url, blockedList) {
     for (const blockedItem of blockedList) {
         const regex = new RegExp(`^(?:[a-zA-Z0-9-]+:\\/\\/)?(?:[a-zA-Z0-9-]+\\.)?${blockedItem.replace(/\./g, '\\.')}`, 'i');
         if (url.match(regex)) {
             return true;
-        };
-    };
+        }
+    }
     return false;
-};
+}
 
 function isBlockedTLD(url, blockedTLDList) {
     const urlParts = url.split('/');
@@ -37,45 +37,46 @@ function isBlockedTLD(url, blockedTLDList) {
 
             if (domain.match(regex)) {
                 return true;
-            };
-        };
-    };
+            }
+        }
+    }
     return false;
-};
+}
+
+function isYouTubeShorts(url) {
+    return /youtube\.com\/shorts\//.test(url);
+}
 
 function isVideo(url) {
     const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v=/;
-
     return youtubeRegex.test(url);
-};
+}
 
 function getVideoID(url) {
     const urlParams = new URLSearchParams(new URL(url).search);
-
     return urlParams.get('v');
-};
+}
 
 function isVideoAllowed(url, allowlist) {
     const videoID = getVideoID(url);
-
     return allowlist.includes(videoID);
-};
+}
 
-function blockVidoes() {
-    if (isYouTubeVideoPage(window.location.href) && !isVideoAllowed(window.location.href, ytAllowlist)) {
+function blockVideos() {
+    if ((isVideo(window.location.href) || isYouTubeShorts(window.location.href)) && !isVideoAllowed(window.location.href, ytAllowlist)) {
         blockSite();
-    };
-};
+    }
+}
 
 function handleElementCreation(element) {
     const elementURL = element.src || element.data || element.href;
 
     if (elementURL && (isBlocked(elementURL, blockedURLs) || isBlockedTLD(elementURL, blockedTLDs))) {
         blockSite();
-    };
-};
+    }
+}
 
-blockVidoes();
+blockVideos();
 
 const blockedElements = document.querySelectorAll('iframe, object, embed');
 blockedElements.forEach(handleElementCreation);
@@ -85,11 +86,11 @@ const observer = new MutationObserver((mutations) => {
         mutation.addedNodes.forEach((node) => {
             if (node.tagName === 'IFRAME' || node.tagName === 'OBJECT' || node.tagName === 'EMBED') {
                 handleElementCreation(node);
-            };
+            }
         });
     });
 
-    blockVidoes();
+    blockVideos();
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
