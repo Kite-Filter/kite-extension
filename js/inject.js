@@ -1,19 +1,21 @@
-// Set Localstorage Value
 const lsBlockedURLs = localStorage.getItem('blockedURLs');
 const lsBlockedTLDs = localStorage.getItem('blockedTLDs');
+const lsYtAllowlist = localStorage.getItem('ytAllowlist');
 
-// Blocked URLs/TLDs
 const blockedURLs = lsBlockedURLs ? JSON.parse(lsBlockedURLs) : ['example.com', 'krunker.io'];
 const blockedTLDs = lsBlockedTLDs ? JSON.parse(lsBlockedTLDs) : ['.tech'];
+const ytAllowlist = lsYtAllowlist ? JSON.parse(lsYtAllowlist) : ['zBePOfn5FIg'];
 
-// Update Block List
 function updateBlocked() {
     localStorage.setItem('blockedURLs', JSON.stringify(blockedURLs));
     localStorage.setItem('blockedTLDs', JSON.stringify(blockedTLDs));
+    localStorage.setItem('ytAllowlist', JSON.stringify(ytAllowlist));
 }
 
+function blockSite() {
+    window.location.href = 'https://entrpix.github.io';
+}
 
-// Site Blocker
 function isBlocked(url, blockedList) {
     for (const blockedItem of blockedList) {
         const regex = new RegExp(`^(?:[a-zA-Z0-9-]+:\\/\\/)?(?:[a-zA-Z0-9-]+\\.)?${blockedItem.replace(/\./g, '\\.')}`, 'i');
@@ -24,24 +26,45 @@ function isBlocked(url, blockedList) {
     return false;
 }
 
-// TLD Blocker
 function isBlockedTLD(url, blockedTLDList) {
-    const domain = url.split('/')[2];
-    for (const blockedTLD of blockedTLDList) {
-        const regex = new RegExp(`\\${blockedTLD}$`, 'i');
-        if (domain.match(regex)) {
-            return true;
+    const urlParts = url.split('/');
+
+    if (urlParts.length >= 3) {
+        const domain = urlParts[2];
+
+        for (const blockedTLD of blockedTLDList) {
+            const regex = new RegExp(`\\${blockedTLD}$`, 'i');
+
+            if (domain.match(regex)) {
+                return true;
+            }
         }
     }
+
     return false;
 }
 
-// Block Site
-function blockSite() {
-     window.location.href = `https://entrpix.github.io`;
+function isVideo(url) {
+    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v=/;
+    return youtubeRegex.test(url);
 }
 
-// External Site Load Fix
+function getVideoID(url) {
+    const urlParams = new URLSearchParams(new URL(url).search);
+    return urlParams.get('v');
+}
+
+function isVideoAllowed(url, allowlist) {
+    const videoID = getVideoID(url);
+    return allowlist.includes(videoID);
+}
+
+function blockVidoes() {
+    if (isYouTubeVideoPage(window.location.href) && !isVideoAllowed(window.location.href, ytAllowlist)) {
+        blockSite();
+    }
+}
+
 function handleElementCreation(element) {
     const elementURL = element.src || element.data || element.href;
 
@@ -50,16 +73,11 @@ function handleElementCreation(element) {
     }
 }
 
-// Block on Inital Load
-if (isBlocked(window.location.href, blockedURLs) || isBlockedTLD(window.location.href, blockedTLDs)) {
-    blockSite();
-}
+blockVidoes();
 
-// Check Elements
 const blockedElements = document.querySelectorAll('iframe, object, embed');
 blockedElements.forEach(handleElementCreation);
 
-// Block Elements
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
@@ -68,9 +86,10 @@ const observer = new MutationObserver((mutations) => {
             }
         });
     });
+
+    blockVidoes();
 });
 
-observer.observe(document.body, { childList: true, subtree: true });    
+observer.observe(document.body, { childList: true, subtree: true });
 
-// Reset Block List Every 30s
 setInterval(updateBlocked, 30000);

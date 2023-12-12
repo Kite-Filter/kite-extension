@@ -20,17 +20,16 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 - [X] Block Certain TLDs
 - [X] Block Default TompHTTP Bare Server Paths
 - [X] Iframe/Embed/Object Prevention
-### Needs More Testing
+- [X] Allowlist Youtube System
 - [X] Enfore HTTPS Traffic
+- [X] Localstorage Integration
 ### Working On
 - [ ] Block Newly-Registered Domains (Cannot Test as of Now)
 - [ ] Block UV & DiP SW's
 - [ ] Match Site HTML with Popular Unblocker HTMLs
 ### Hell
-- [X] Localstorage Integration (Extension is Not Fully Finished so it Stays in Here)
 - [ ] Sever Intergration
 - [ ] History Monitoring
 - [ ] History Reporting
 ### Other
-- [ ] Allowlist Youtube System
 - [ ] Documentation
