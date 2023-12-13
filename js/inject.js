@@ -63,7 +63,11 @@ function isVideoAllowed(url, allowlist) {
 }
 
 function blockVideos() {
-    if ((isVideo(window.location.href) || isYouTubeShorts(window.location.href)) && !isVideoAllowed(window.location.href, ytAllowlist)) {
+    const currentURL = window.location.href;
+    if ((isVideo(currentURL) || isYouTubeShorts(currentURL)) && !isVideoAllowed(currentURL, ytAllowlist)) {
+        blockSite();
+    }
+    if (isBlocked(currentURL, blockedURLs) || isBlockedTLD(currentURL, blockedTLDs)) {
         blockSite();
     }
 }
