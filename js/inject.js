@@ -63,7 +63,7 @@ function isVideoAllowed(url, allowlist) {
 }
 
 function blockVideos() {
-    const currentURL = window.location.href;
+    const currentURL = site;
     if ((isVideo(currentURL) || isYouTubeShorts(currentURL)) && !isVideoAllowed(currentURL, ytAllowlist)) {
         blockSite();
     }
@@ -98,5 +98,4 @@ const observer = new MutationObserver((mutations) => {
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
-
 setInterval(updateBlocked, 30000);
