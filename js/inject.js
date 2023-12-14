@@ -63,7 +63,7 @@ function isVideoAllowed(url, allowlist) {
 }
 
 function blockVideos() {
-    const currentURL = site;
+    const currentURL = window.location.href;
     if ((isVideo(currentURL) || isYouTubeShorts(currentURL)) && !isVideoAllowed(currentURL, ytAllowlist)) {
         blockSite();
     }
