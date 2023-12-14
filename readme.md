@@ -23,6 +23,7 @@ $ git clone https://github.com/entrpix/kite-filter-client.git
 - [X] Allowlist Youtube System
 - [X] Enfore HTTPS Traffic
 - [X] Localstorage Integration
+- [X] Safesearch
 ### Working On
 - [ ] Block Newly-Registered Domains (Cannot Test as of Now)
 - [ ] Block UV & DiP SW's

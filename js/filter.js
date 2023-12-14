@@ -1,3 +1,13 @@
+let safeSearch;
+
+chrome.storage.local.get('safeSearch', (result) => {
+  safeSearch = result.safeSearch || ['proxy'];
+});
+
+function updateBlocked() {
+  chrome.storage.local.set({ 'safeSearch': safeSearch });
+};
+
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
   const url = details.url;
 
@@ -74,3 +84,22 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     chrome.tabs.update(details.tabId, { url: httpsUrl });
   };
 });
+
+chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+  const url = details.url;
+
+  const google = /^https:\/\/www\.google\.[a-z.]+\/(?:search|webhp)[?#]/;
+
+  if (google.test(url)) {
+    const match = url.match(/[?&]q=([^&]+)/);
+    if (match) {
+      const searchQuery = decodeURIComponent(match[1]);
+  
+      if (safeSearch.some(word => new RegExp(`\\b${word.replace(/\s+/g, '\\s*')}\\b`, 'i').test(searchQuery))) {
+        chrome.tabs.update(details.tabId, { url: chrome.runtime.getURL('pages/blocked.html') });
+      }      
+    }
+  }
+});
+
+setInterval(updateBlocked, 30000);
