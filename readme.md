@@ -1,6 +1,5 @@
-# Kite Filter Client
-What is the Kite Filter Client?\
-It's Simple! It's just the Kite Filter Chrome Extension
+# Kite Extension
+Kite Filter Extension
 
 ## Installation
 ```bash
