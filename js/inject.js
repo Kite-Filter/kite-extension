@@ -13,7 +13,7 @@ function updateBlocked() {
 }
 
 function blockSite() {
-    window.location.href = 'https://entrpix.github.io';
+    window.location.href = 'https://kite-filter.github.io/blocked/';
 }
 
 function isBlocked(url, blockedList) {
@@ -47,6 +47,14 @@ function isYouTubeShorts(url) {
     return /youtube\.com\/shorts\//.test(url);
 }
 
+function isYouTubePost(url) {
+    return /youtube\.com\/post\//.test(url);
+}
+
+function isYouTubeCommunity(url) {
+    return /youtube\.com\/.*\/community/.test(url);
+}
+
 function isVideo(url) {
     const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v=/;
     return youtubeRegex.test(url);
@@ -64,7 +72,7 @@ function isVideoAllowed(url, allowlist) {
 
 function blockVideos() {
     const currentURL = window.location.href;
-    if ((isVideo(currentURL) || isYouTubeShorts(currentURL)) && !isVideoAllowed(currentURL, ytAllowlist)) {
+    if ((isVideo(currentURL) || isYouTubeShorts(currentURL) || isYouTubeCommunity(currentURL) || isYouTubePost(currentURL)) && !isVideoAllowed(currentURL, ytAllowlist)) {
         blockSite();
     }
     if (isBlocked(currentURL, blockedURLs) || isBlockedTLD(currentURL, blockedTLDs)) {
