@@ -25,11 +25,39 @@
   ],
 
   "background": {
-    "service_worker": "js/filter.js"
+    "service_worker": "js/background.js"
   },
 
-  "content_scripts": [{
+  "content_scripts": [
+    {
     "matches": ["<all_urls>"],
-    "js": ["js/inject.js"]
-    }]
+    "js": ["js/filter.js"]
+    },
+
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*"
+    ],
+    "js": ["js/youtube.js"]
+    },
+
+    {
+      "matches": [
+        "*://google.com/search*",
+        "*://www.google.com/search*",
+        "*://google.co.uk/search*",
+        "*://www.google.co.uk/search*",
+        "*://google.ie/search*",
+        "*://www.google.ie/search*",
+        "*://google.ca/search*",
+        "*://www.google.ca/search*",
+        "*://google.com.au/search*",
+        "*://www.google.com.au/search*",
+        "*://google.co.in/search*",
+        "*://www.google.co.in/search*"
+    ],
+    "js": ["js/safesearch.js"]
+    }
+  ]
 } 
