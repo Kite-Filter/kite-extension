@@ -25,13 +25,13 @@
   ],
 
   "background": {
-    "service_worker": "js/background.js"
+    "service_worker": ["js/remote.js", "js/bookmarklet.js"]
   },
 
   "content_scripts": [
     {
     "matches": ["<all_urls>"],
-    "js": ["js/filter.js"]
+    "js": ["js/filter.js", "js/element.js", "js/domain.js"]
     },
 
     {

@@ -1,0 +1,1 @@
+// Block Newly Registered Domains and Enforce HTTPS
