@@ -10,8 +10,9 @@ $ git clone https://github.com/kite-filter/kite-extension.git
 ```
 
 ## TODO
-- [ ] Site Filtering
-- [ ] TLD Filtering
+- [ ] Domain Filtering
+    - [ ] DNS Filtering
+    - [ ] TLD Filtering
 - [ ] Youtube Filtering
     - [ ] Site Allowlist
     - [ ] Block Community Posts
@@ -24,11 +25,21 @@ $ git clone https://github.com/kite-filter/kite-extension.git
 - [ ] Local HTML File Blocking
 - [ ] Localstorage
 - [ ] Server Intergration
-- [ ] Screen Sharing
 - [ ] Remote Monitoring
     - [ ] Block Screen
     - [ ] Tab Limit
     - [ ] Manage Tabs
+    - [ ] Screen Sharing
 - [ ] Enforce HTTPS Connection
 - [ ] Block Newly Registered Domains
-- [ ] Block Iframes, Embeds, Etc
+- [ ] Element Filtering (href="", src="", etc)
+- [ ] Webproxy Detection
+    - [ ] UV
+    - [ ] Dynamic
+    - [ ] Areo
+    - [ ] Areo II
+    - [ ] Rammerhead
+    - [ ] Bare Server
+    - [ ] Bare Client
+    - [ ] Croxyproxy
+    - [ ] General
